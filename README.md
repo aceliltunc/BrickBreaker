@@ -9,9 +9,13 @@ This Brick Breaker game coded in C using the SDL library.
   - When press D key or left arrow key, racket move to right.
   - When press A key or right arrow key, racket move to left. 
 
-## Screen Shot
+## Screen Shots
+  <h4>Screen Shot before start</h4>
+<img src="image/BrickBreaker1.JPG" style="text-align: center">
+  
+  <h4>Screen Shot while working</h4>
+<img src="image/BrickBreaker2.JPG" style="text-align: center">
 
-![Brick Breaker](image-ingame/brick_breaker.PNG)
 
 ## Errors in Code
 
