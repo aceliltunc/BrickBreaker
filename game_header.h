@@ -127,7 +127,7 @@ void RenderBall(const Ball *ball){
 
 Player MakePlayer(void){
     Player player = {
-        .xposition = 140,
+        .xposition = 160,
     };
     return player;
 }
