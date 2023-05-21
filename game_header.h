@@ -22,8 +22,8 @@ const int player_margin = 570;
 const float player_move_speed = 150.0f;
 
 // size of bricks
-const int bricks_width = 29;
-const int bricks_height = 29;
+const int bricks_width = 30;
+const int bricks_height = 30;
 
 const int row = 5;
 const int col = 10;
@@ -211,13 +211,14 @@ Bricks MakeBricks(void){
     for(size_t i = 0 ; i < (col*row) ; i++ ){
          for(size_t j = 0 ; j < row ; j++){
             for(size_t k = 0 ; k < col ; k++ ){
-                bricks[10*j+k].x = 39*k+10;
-                bricks[10*j+k].y = 39*j+10;
+                bricks[10*j+k].x = 35*k+28;
+                bricks[10*j+k].y = 35*j+40;
                 bricks[10*j+k].w = bricks_width;
                 bricks[10*j+k].h = bricks_height;
             }
         }
     }
+
     return bricks[50];
 }
 
@@ -232,11 +233,12 @@ void UpdateBricks(float elapsed){
 
     for(size_t i = 0 ; i < (col*row) ; i++ ){
         if(bricks[i].destroyed==true){
-                    if(bricks[49].destroyed == true){
-                        brickRect[49].x = -5;
-                        brickRect[49].y = -5;
-                        brickRect[49].w = 0;
-                        brickRect[49].h = 0;
+                    if(i==10    &&  i==20    &&  i==21  &&  i==30    &&  i==31    &&  i==32    &&  i==40    &&  i==41    &&  i==42    &&  i==43
+                        &&i==19    &&  i==28    &&  i==29  &&  i==37    &&  i==38    &&  i==39    &&  i==46   &&  i==47    &&  i==48    &&  i==49){
+                        brickRect[i].x = -5;
+                        brickRect[i].y = -5;
+                        brickRect[i].w = 0;
+                        brickRect[i].h = 0;
                     }else{
                     for(size_t j = 0 ; j < row ; j++){
                         for(size_t k = 0 ; k < col ; k++ ){
@@ -249,6 +251,7 @@ void UpdateBricks(float elapsed){
             }
 
         }else{
+            for(size_t i = 0 ; i < (col*row) ; i++ ){
                 for(size_t j = 0 ; j < row ; j++){
                     for(size_t k = 0 ; k < col ; k++ ){
                         if(bricks[10*j+k].destroyed==false){
@@ -259,35 +262,15 @@ void UpdateBricks(float elapsed){
                         }
                     }
                 }
+            }
         }
 
     }
 
     for(size_t i = 0 ; i < (col*row) ; i++ ){
-        if(i==49){
-            if(SDL_HasIntersectionF(&ballRect, &brickRect[49])){
-                // bounce from left of the Brick
-                if(ball.x < brickRect[49].x){
-                    ball.xSpeed = -SDL_fabs(ball.xSpeed);
-                }
-                // bounce from right of the Brick
-                else if(ball.x > brickRect[49].x + 27){
-                    ball.xSpeed = SDL_fabs(ball.xSpeed);
-                }
-                // bounce from top of the Brick
-                if(ball.y < (brickRect[49].y) ){
-                    ball.ySpeed = -SDL_fabs(ball.ySpeed);
-                }
-                // bounce from under of the Brick
-                else if(ball.y >=(brickRect[49].y + 27)){
-                    ball.ySpeed = SDL_fabs(ball.ySpeed);
-                }
-                bricks[49].destroyed=true;
-                UpdateScore(2,5);
-                i==50;
-            }
-        }
-        else if( i < 49){
+
+    if(i!=10    &&  i!=20    &&  i!=21  &&  i!=30    &&  i!=31    &&  i!=32    &&  i!=40    &&  i!=41    &&  i!=42    &&  i!=43
+        &&i!=19    &&  i!=28    &&  i!=29  &&  i!=37    &&  i!=38    &&  i!=39    &&  i!=46   &&  i!=47    &&  i!=48    &&  i!=49){
             if(SDL_HasIntersectionF(&ballRect, &brickRect[i])){
                 // bounce from left of the Brick
                 if(ball.x < brickRect[i].x){
@@ -313,13 +296,14 @@ void UpdateBricks(float elapsed){
         }
     }
     //text in title if all bricks are broken
-    if(countDestroyed >= (col*row)){
-        char *fmt = "CONGRATULATIONS!! All bricks are broken";
+    if(countDestroyed >= 30){
+        char *fmt = "CONGRATULATIONS!!! | Your Score : %d";
         int len = snprintf(NULL, 0 ,fmt, racket.score, countDestroyed);
         char buf[ len + 1];
         snprintf(buf, len + 1 , fmt, racket.score, countDestroyed);
 
         SDL_SetWindowTitle(window, buf);
+        served=false;
     }
 
 
@@ -329,15 +313,16 @@ void RenderBricks(void){
     SDL_Rect ballRect = {   .x = ball.x,    .y = ball.y,    .w = ball.size, .h = ball.size, };
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-    SDL_Rect brickRect[50];
+    SDL_Rect brickRect[51];
 
     for(size_t i = 0 ; i < (col*row) ; i++ ){
         if(bricks[i].destroyed==true){
-                    if(bricks[49].destroyed == true){
-                        brickRect[49].x = -5;
-                        brickRect[49].y = -5;
-                        brickRect[49].w = 0;
-                        brickRect[49].h = 0;
+                    if(i==10    &&  i==20    &&  i==21  &&  i==30    &&  i==31    &&  i==32    &&  i==40    &&  i==41    &&  i==42    &&  i==43
+                        &&i==19    &&  i==28    &&  i==29  &&  i==37    &&  i==38    &&  i==39    &&  i==46   &&  i==47    &&  i==48    &&  i==49){
+                        brickRect[i].x = -5;
+                        brickRect[i].y = -5;
+                        brickRect[i].w = 0;
+                        brickRect[i].h = 0;
                     }else{
                     for(size_t j = 0 ; j < row ; j++){
                         for(size_t k = 0 ; k < col ; k++ ){
@@ -367,9 +352,11 @@ void RenderBricks(void){
     }
 
 
-    for( size_t i = 0 ; i < col*row ; i++){
+    for( size_t i = 0 ; i < (col*row) ; i++){
         if(bricks[i].destroyed == false){
-        SDL_RenderFillRect(renderer, &brickRect[i]);
+            if(i!=10    &&  i!=20    &&  i!=21  &&  i!=30    &&  i!=31    &&  i!=32    &&  i!=40    &&  i!=41    &&  i!=42    &&  i!=43
+               &&i!=19    &&  i!=28    &&  i!=29  &&  i!=37    &&  i!=38    &&  i!=39    &&  i!=46   &&  i!=47    &&  i!=48    &&  i!=49)
+            SDL_RenderFillRect(renderer, &brickRect[i]);
         }
 
     }
