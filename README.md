@@ -8,6 +8,8 @@ This Brick Breaker game coded in C using the SDL library.
   - When push space button, game start and ball move inside the window.
   - When press D key or left arrow key, racket move to right.
   - When press A key or right arrow key, racket move to left. 
+  - When press X key, the ball placed to first location.
+  - When press ESC, window shutdown
 
 ## Screen Shots
   <h4>Screen Shot before start</h4>
